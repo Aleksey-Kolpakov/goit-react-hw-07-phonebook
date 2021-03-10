@@ -1,5 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import phonebookActions from './phonebook-actions'
+const { addContactError,
+    addContactRequest,
+    addContactSucces,
+    deleteContactError,
+    deleteContactRequest,
+    deleteContactSucces } = phonebookActions;
 
 const initialState = {
     contacts: [
@@ -10,9 +16,9 @@ const initialState = {
     ],
     filter: '',
 }
-export const contactReducer=createReducer(initialState.contacts, {
-  [phonebookActions.addContact]: (state, {payload}) => [payload, ...state],
-  [phonebookActions.deleteContact]: (state, action) => state.filter(contact => contact.id !== action.payload),
+export const contactReducer = createReducer(initialState.contacts, {
+    [addContactSucces]: (state, { payload }) => [payload, ...state],
+    [deleteContactSucces]: (state, action) => state.filter(contact => contact.id !== action.payload),
 });
 // export const contactReducer = (state = initialState.contacts, { type, payload }) => {
 //     switch (type) {

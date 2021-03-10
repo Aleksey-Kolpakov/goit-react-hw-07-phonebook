@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { v4 as randId } from 'uuid';
+// import { v4 as randId } from 'uuid';
 import PropTypes from 'prop-types';
 import phonebookActions from '../../redux/phonebook/phonebook-actions'
+import phonebookOperations from '../../redux/phonebook/phonebook-operations'
 import styles from "./ContactForm.module.css"
 class ContactForm extends Component {
     state = {
@@ -29,11 +30,9 @@ class ContactForm extends Component {
             alert(`${name} Already Exist`);
             return;
         }
-        const id = randId();
         const contact = {
-            id,
-            name: name,
-            number: number
+            name,
+            number
         }
         this.props.addContactToState(contact);
         this.resetForm()
@@ -71,12 +70,12 @@ class ContactForm extends Component {
     }
 }
 const mapStateToProps = state => ({
-    contacts:state.contacts,
+    contacts: state.contacts,
 })
 const mapDispatchToProps = dispatch => ({
-    addContactToState: contact => dispatch(phonebookActions.addContact(contact)),
+    addContactToState: contact => dispatch(phonebookOperations.addContact(contact)),
 })
-export default connect(mapStateToProps,mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 ContactForm.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
