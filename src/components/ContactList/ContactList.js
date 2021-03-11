@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './ContactList.module.css'
 import phonebookActions from '../../redux/phonebook/phonebook-actions'
 import phonebookOperations from '../../redux/phonebook/phonebook-operations'
+import phonebookSelectors from '../../redux/phonebook/phonebook-selectors'
 const ContactList = ({ visibleContacts, deleteContact }) => {
     return (
         <ul className={styles.list}>
@@ -17,9 +18,9 @@ const ContactList = ({ visibleContacts, deleteContact }) => {
 };
 
 const mapStateToProps = state => {
-    const visibleContacts = state.contacts.filter(contact => contact.name.toLowerCase().includes(state.filter.toLowerCase()));
+
     return ({
-        visibleContacts: visibleContacts,
+        visibleContacts: phonebookSelectors.getVisibleContacts(state),
     })
 }
 

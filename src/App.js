@@ -5,6 +5,7 @@ import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
 import styles from './App.module.css';
 import phonebookOperations from './redux/phonebook/phonebook-operations'
+import phonebookSelectors from './redux/phonebook/phonebook-selectors'
 import Loader from 'react-loader-spinner';
 class App extends Component {
   componentDidMount() {
@@ -32,8 +33,8 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => ({
-  error: state.error,
-  loading: state.loading
+  error: phonebookSelectors.getError(state),
+  loading: phonebookSelectors.getLoading(state)
 })
 const mapDispatchToProps = dispatch => ({
   fetchContacts: () => dispatch(phonebookOperations.fetchContacts())
