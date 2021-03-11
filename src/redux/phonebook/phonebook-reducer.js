@@ -5,7 +5,10 @@ const { addContactError,
     addContactSucces,
     deleteContactError,
     deleteContactRequest,
-    deleteContactSucces } = phonebookActions;
+    deleteContactSucces,
+    fetchContactsError,
+    fetchContactsRequest,
+    fetchContactsSucces } = phonebookActions;
 
 const initialState = {
     contacts: [
@@ -16,10 +19,35 @@ const initialState = {
     ],
     filter: '',
 }
-export const contactReducer = createReducer(initialState.contacts, {
+export const contactReducer = createReducer([], {
     [addContactSucces]: (state, { payload }) => [payload, ...state],
     [deleteContactSucces]: (state, action) => state.filter(contact => contact.id !== action.payload),
+    [fetchContactsSucces]: (state, { payload }) => payload,
 });
+
+export const requesReducer = createReducer(false, {
+    [addContactRequest]: () => true,
+    [addContactSucces]: () => false,
+    [addContactError]: () => false,
+    [deleteContactError]: () => false,
+    [deleteContactSucces]: () => false,
+    [deleteContactRequest]: () => true,
+    [fetchContactsError]: () => false,
+    [fetchContactsRequest]: () => true,
+    [fetchContactsSucces]: () => false,
+})
+export const errorReducer = createReducer(false, {
+    [addContactRequest]: () => false,
+    [addContactSucces]: () => false,
+    [addContactError]: (state, { payload }) => payload,
+    [deleteContactError]: (state, { payload }) => payload,
+    [deleteContactSucces]: () => false,
+    [deleteContactRequest]: () => false,
+    [fetchContactsError]: (state, { payload }) => payload,
+    [fetchContactsRequest]: () => true,
+    [fetchContactsSucces]: () => false,
+})
+
 // export const contactReducer = (state = initialState.contacts, { type, payload }) => {
 //     switch (type) {
 //         case actionTypes.ADD:

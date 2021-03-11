@@ -1,7 +1,7 @@
 // import { createStore, combineReducers } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger';
-import { contactReducer, filterReducer } from './phonebook/phonebook-reducer'
+import { contactReducer, filterReducer, errorReducer, requesReducer } from './phonebook/phonebook-reducer'
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit'
 import {
     persistStore, persistReducer, FLUSH,
@@ -21,7 +21,9 @@ const defaultmiddleware = getDefaultMiddleware({
 const middleware = [...defaultmiddleware, logger]
 const rootReducer = combineReducers({
     contacts: contactReducer,
-    filter: filterReducer
+    filter: filterReducer,
+    error: errorReducer,
+    loading: requesReducer
 })
 
 // const persistedReducer=persistReducer(persistConfig, rootReducer);

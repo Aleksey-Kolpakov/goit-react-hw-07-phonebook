@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
     filter: state.filter
 })
 
-const mapDispatchToProps = dispatc => ({
-    handleChange: e => dispatc(phonebookActions.changeFilter(e.target.value))
+const mapDispatchToProps = dispatch => ({
+    handleChange: e => dispatch(phonebookActions.changeFilter(e.target.value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

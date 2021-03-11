@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { v4 as randId } from 'uuid';
 import PropTypes from 'prop-types';
 import phonebookActions from '../../redux/phonebook/phonebook-actions'
 import phonebookOperations from '../../redux/phonebook/phonebook-operations'
-import styles from "./ContactForm.module.css"
+import styles from "./ContactForm.module.css";
+import phonebookSelectors from '../../redux/phonebook/phonebook-selectors'
 class ContactForm extends Component {
     state = {
         name: '',
@@ -70,7 +70,7 @@ class ContactForm extends Component {
     }
 }
 const mapStateToProps = state => ({
-    contacts: state.contacts,
+    contacts: phonebookSelectors.getContacts(state),
 })
 const mapDispatchToProps = dispatch => ({
     addContactToState: contact => dispatch(phonebookOperations.addContact(contact)),

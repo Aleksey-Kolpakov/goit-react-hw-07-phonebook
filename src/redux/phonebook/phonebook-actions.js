@@ -20,6 +20,10 @@ const deleteContactRequest = createAction('phoneBook/deleteContactRequest');
 //     type: actionTypes.DELETE,
 //     payload: id
 // })
+const fetchContactsRequest = createAction('phoneBook/fetchContactsRequest');
+const fetchContactsSucces = createAction('phoneBook/fetchContactsSucces');
+const fetchContactsError = createAction('phoneBook/fetchContactsError');
+
 const changeFilter = createAction('phonebook/change-filter');
 // const changeFilter = value => ({
 //     type: actionTypes.CHANGE_FILTER,
@@ -34,4 +38,7 @@ export default {
     deleteContactSucces,
     deleteContactError,
     deleteContactRequest,
+    fetchContactsRequest,
+    fetchContactsSucces,
+    fetchContactsError
 }
