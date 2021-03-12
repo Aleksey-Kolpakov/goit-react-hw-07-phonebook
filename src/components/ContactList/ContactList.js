@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css'
 import phonebookActions from '../../redux/phonebook/phonebook-actions'
 import phonebookOperations from '../../redux/phonebook/phonebook-operations'
 import phonebookSelectors from '../../redux/phonebook/phonebook-selectors'
-const ContactList = ({ visibleContacts, deleteContact }) => {
+const ContactList = ({ visibleContacts, deleteContact, fetchContacts }) => {
+    useEffect(() => {
+        fetchContacts();
+    }, [fetchContacts])
     return (
         <ul className={styles.list}>
             {visibleContacts.map(contact => (
@@ -25,7 +28,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    deleteContact: id => dispatch(phonebookOperations.deleteContact(id))
+    deleteContact: id => dispatch(phonebookOperations.deleteContact(id)),
+    fetchContacts: () => dispatch(phonebookOperations.fetchContacts())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 

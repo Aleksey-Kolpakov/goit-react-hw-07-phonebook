@@ -8,9 +8,6 @@ import phonebookOperations from './redux/phonebook/phonebook-operations'
 import phonebookSelectors from './redux/phonebook/phonebook-selectors'
 import Loader from 'react-loader-spinner';
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchContacts()
-  }
   render() {
     return (
       <div className={styles.container} >
@@ -36,8 +33,6 @@ const mapStateToProps = state => ({
   error: phonebookSelectors.getError(state),
   loading: phonebookSelectors.getLoading(state)
 })
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(phonebookOperations.fetchContacts())
-})
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps)(App);
 
